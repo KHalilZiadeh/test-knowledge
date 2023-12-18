@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Quizz App</title>
+  </head>
+
+  <body>
+    <header>
+      <!-- <div
+        class="viewer"
+        style="
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 250px;
+          height: 250px;
+          border-radius: 50%;
+          background-color: transparent;
+          box-shadow: 0 0 1px 1000px #000c;
+          outline: 1px solid #fffc;
+          outline-offset: 15px;
+          z-index: 10;
+        "
+      ></div> -->
+      <p dir="rtl">قم باختيار وضع اللعب</p>
+      <div class="container" dir="rtl">
+        <button id="selected">محدد</button>
+        <button id="random">عشوائي</button>
+      </div>
+      <div class="burger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </header>
+
+    <main>
+      <div class="card">
+        <div class="categories">
+          <div class="category" id="messanger" data-ind="0">نبي</div>
+          <div class="category" id="quran" data-ind="1">قرآن</div>
+          <div class="category" id="fiqh" data-ind="2">فقه</div>
+          <div class="category" id="companion" data-ind="3">صحابي</div>
+          <div class="category" id="history" data-ind="4">تاريخ</div>
+        </div>
+        <form action="">
+          <div class="info">
+            <div class="time"></div>
+            <button class="next">التالي</button>
+            <div class="progress"></div>
+          </div>
+          <div class="question" dir="rtl">
+            <div class="question-content"></div>
+            <div class="answers">
+              <div class="answer">
+                <input
+                  type="radio"
+                  name="answer"
+                  id="A"
+                  style="display: none"
+                />
+                <label for="A">
+                  <div class="answer-content"></div>
+                </label>
+              </div>
+              <div class="answer">
+                <input
+                  type="radio"
+                  name="answer"
+                  id="B"
+                  style="display: none"
+                />
+                <label for="B">
+                  <div class="answer-content"></div>
+                </label>
+              </div>
+              <div class="answer">
+                <input
+                  type="radio"
+                  name="answer"
+                  id="C"
+                  style="display: none"
+                />
+                <label for="C">
+                  <div class="answer-content"></div>
+                </label>
+              </div>
+              <div class="answer">
+                <input
+                  type="radio"
+                  name="answer"
+                  id="D"
+                  style="display: none"
+                />
+                <label for="D">
+                  <div class="answer-content"></div>
+                </label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
+    <div class="game-ended">
+      <p class="message"></p>
+      <button class="confirm-btn">أعد المحاولة</button>
+    </div>
+
+    <script src="./main.js" defer></script>
+  </body>
+</html>

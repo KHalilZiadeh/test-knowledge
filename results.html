@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        font-family: "Amiri";
+        font-size: 62.5%;
+      }
+      .outter-ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+        height: fit-content;
+      }
+      .outter-li {
+        width: 98%;
+        height: fit-content;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 15px;
+      }
+      .inner-ul {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: fit-content;
+        padding: 0;
+      }
+      .q {
+        background-color: #f2f7f8;
+        border-radius: 10px;
+        height: 35px;
+        color: #2f2f2f;
+        font-size: 1.5rem;
+        width: 32%;
+        padding-right: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      }
+      .ca {
+        background-color: #0f0c;
+        border-radius: 10px;
+        height: 35px;
+        color: #2f2f2f;
+        font-size: 1.5rem;
+        width: 32%;
+        padding-right: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      }
+      .an {
+        background-color: transparent;
+        border-radius: 10px;
+        height: 35px;
+        color: #2f2f2f;
+        font-size: 1.5rem;
+        width: 32%;
+        padding-right: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      }
+      button {
+        all: unset;
+        width: 20%;
+        background: #f2f7f8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 0;
+        font-size: 2rem;
+        margin: 0 auto 15px;
+        border-radius: 1rem;
+        cursor: pointer;
+      }
+    </style>
+    <title>Results</title>
+  </head>
+  <body style="padding-top: 25px; background-color: #6da3b0">
+    <h1>
+      <ul
+        style="
+          list-style: none;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 98%;
+          height: fit-content;
+          margin: 0 auto 15px;
+        "
+        dir="rtl"
+      >
+        <li
+          style="
+            border-bottom: 1px solid #f2f7f8;
+            color: #2f2f2f;
+            font-weight: normal;
+            height: 35px;
+            font-size: 3.5rem;
+            width: 32%;
+            padding-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          "
+        >
+          السؤال
+        </li>
+        <li
+          style="
+            border-bottom: 1px solid #f2f7f8;
+            color: #2f2f2f;
+            font-weight: normal;
+            height: 35px;
+            font-size: 3.5rem;
+            width: 32%;
+            padding-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          "
+        >
+          الإجابة الصحيحة
+        </li>
+        <li
+          style="
+            border-bottom: 1px solid #f2f7f8;
+            color: #2f2f2f;
+            font-weight: normal;
+            height: 35px;
+            font-size: 3.5rem;
+            width: 32%;
+            padding-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          "
+        >
+          إجابتك
+        </li>
+      </ul>
+    </h1>
+
+    <button>لعب من جديد</button>
+    <script defer>
+      let correctAnswers;
+      let answers;
+
+      function getLocalData() {
+        correctAnswers = localStorage.getItem("correctAnswers");
+        correctAnswers = JSON.parse(correctAnswers);
+        console.log(correctAnswers);
+        answers = localStorage.getItem("answers");
+        answers = JSON.parse(answers);
+        console.log(answers);
+      }
+
+      function addDOM(num) {
+        let p = document.createElement("p");
+        p.innerHTML = `${num}`;
+        let oUl = document.createElement("ul");
+        oUl.className = "outter-ul";
+        oUl.setAttribute("dir", "rtl");
+        let oLi = document.createElement("li");
+        oLi.className = "outter-li";
+        let iUl = document.createElement("ul");
+        iUl.className = "inner-ul";
+        document
+          .querySelector("h1")
+          .parentNode.insertBefore(
+            oUl,
+            document.querySelector("h1").nextSibling
+          );
+        oUl.append(oLi);
+        oLi.append(iUl);
+        for (let i = 0; i < 3; i++) {
+          let iLi = document.createElement("li");
+          if (i == 0) {
+            iLi.className = "q";
+          } else if (i == 1) {
+            iLi.className = "ca";
+          } else iLi.className = "an";
+
+          document.querySelector(".inner-ul").append(iLi);
+        }
+      }
+
+      function viewCorrect(num) {
+        let qs = document.getElementsByClassName("q");
+        let cas = document.getElementsByClassName("ca");
+        qs[Math.ceil(num / 2)].innerHTML = correctAnswers[num];
+        cas[Math.ceil(num / 2)].innerHTML = correctAnswers[num + 1];
+      }
+
+      function addAnswers(num) {
+        let cas = document.getElementsByClassName("ca");
+        let ans = document.getElementsByClassName("an");
+        ans[num].innerHTML = answers[num];
+        ans[num].style.backgroundColor =
+          cas[num].innerHTML === ans[num].innerHTML ? "#0f0c" : "#f00c";
+      }
+
+      getLocalData();
+      for (let i = 0; i < correctAnswers.length / 2; i++) addDOM(i);
+      for (let i = 0; i < correctAnswers.length; i += 2) viewCorrect(i);
+      for (let i = 0; i < answers.length; i++) addAnswers(i);
+
+      document.querySelector("button").addEventListener("click", () => {
+        localStorage.removeItem("correctAnswers");
+        localStorage.removeItem("answers");
+
+        location.href = "./index.html";
+      });
+    </script>
+  </body>
+</html>
