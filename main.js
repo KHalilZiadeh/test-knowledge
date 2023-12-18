@@ -11,7 +11,7 @@ let firstPass = true;
 let portrait = matchMedia("(orientation:portrait)");
 let isPortrait = false;
 
-const duration = 7;
+const duration = 30;
 let timeLeft = duration;
 let timeLeftCounter;
 
