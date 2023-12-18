@@ -17,38 +17,48 @@
         font-family: "Amiri";
         font-size: 62.5%;
       }
-      .outter-ul {
-        list-style: none;
+      .outter-ol {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
         width: 100%;
         height: fit-content;
+        counter-reset: numbring;
       }
       .outter-li {
         width: 98%;
-        height: fit-content;
+        height: 10svh;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
         margin-bottom: 15px;
+        color: #2f2f2f;
       }
+      .outter-li::before {
+        content: counter(numbring) ".";
+        counter-increment: numbring;
+        font-size: 2.5rem;
+      }
+
       .inner-ul {
         list-style: none;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        width: 100%;
-        height: fit-content;
+        width: 97%;
+        height: 100%;
         padding: 0;
+        margin: 0 auto;
+      }
+      .inner-ul li {
+        height: 100%;
+        font-size: 1.75rem;
       }
       .q {
         background-color: #f2f7f8;
         border-radius: 10px;
-        height: 35px;
         color: #2f2f2f;
-        font-size: 1.5rem;
         width: 32%;
         padding-right: 10px;
         display: flex;
@@ -58,9 +68,7 @@
       .ca {
         background-color: #0f0c;
         border-radius: 10px;
-        height: 35px;
         color: #2f2f2f;
-        font-size: 1.5rem;
         width: 32%;
         padding-right: 10px;
         display: flex;
@@ -70,9 +78,7 @@
       .an {
         background-color: transparent;
         border-radius: 10px;
-        height: 35px;
         color: #2f2f2f;
-        font-size: 1.5rem;
         width: 32%;
         padding-right: 10px;
         display: flex;
@@ -91,6 +97,7 @@
         margin: 0 auto 15px;
         border-radius: 1rem;
         cursor: pointer;
+        color: #2f2f2f;
       }
     </style>
     <title>Results</title>
@@ -175,23 +182,28 @@
       }
 
       function addDOM(num) {
-        let p = document.createElement("p");
-        p.innerHTML = `${num}`;
-        let oUl = document.createElement("ul");
-        oUl.className = "outter-ul";
-        oUl.setAttribute("dir", "rtl");
+        let oOl;
+        if (!document.querySelector("ol")) {
+          oOl = document.createElement("ol");
+          oOl.className = "outter-ol";
+          oOl.setAttribute("dir", "rtl");
+          oOl.setAttribute("type", "1");
+          document.body.insertBefore(
+            oOl,
+            document.querySelector("h1").nextSibling
+          );
+        } else {
+          oOl = document.querySelector("ol");
+        }
+
         let oLi = document.createElement("li");
         oLi.className = "outter-li";
         let iUl = document.createElement("ul");
         iUl.className = "inner-ul";
-        document
-          .querySelector("h1")
-          .parentNode.insertBefore(
-            oUl,
-            document.querySelector("h1").nextSibling
-          );
-        oUl.append(oLi);
+
+        oOl.append(oLi);
         oLi.append(iUl);
+
         for (let i = 0; i < 3; i++) {
           let iLi = document.createElement("li");
           if (i == 0) {
@@ -200,7 +212,9 @@
             iLi.className = "ca";
           } else iLi.className = "an";
 
-          document.querySelector(".inner-ul").append(iLi);
+          document
+            .querySelectorAll(".inner-ul")
+            [document.querySelectorAll(".inner-ul").length - 1].append(iLi);
         }
       }
 
